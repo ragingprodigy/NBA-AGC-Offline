@@ -1,0 +1,213 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="container" id="san_and_bench">
+    <div class="row">
+        <div class="center-form panel panel-purple" ng-show="secondForm">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    Delegate Information
+                </div>
+            </div>
+            <div class="panel-body">
+                <form name="dForm" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Fee Payable</label>
+                        <div class="col-sm-8">
+                            <input readonly type="text" class="form-control"
+                                   value="NGN {{formatMoney(data.conferenceFee)}}" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Title</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" placeholder="Dr. Chief., etc"
+                                   ng-model="data.prefix" autofocus>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">First Name <span class="required">*</span> </label>
+                        <div class="col-sm-8">
+                            <input type="text" placeholder="FIRST NAME" class="form-control" ng-model="data.firstName"
+                                   required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Surname <span class="required">*</span> </label>
+                        <div class="col-sm-8">
+                            <input type="text" placeholder="SURNAME" class="form-control" ng-model="data.surname"
+                                   required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Middle Name </label>
+                        <div class="col-sm-8">
+                            <input type="text" placeholder="MIDDLE NAME" class="form-control"
+                                   ng-model="data.middleName">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Suffix </label>
+                        <div class="col-sm-8">
+                            <input type="text" placeholder="JCA, JSC, GCON, etc" class="form-control"
+                                   ng-model="data.suffix">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Email <span class="required">*</span> </label>
+                        <div class="col-sm-8">
+                            <input type="text" placeholder="EMAIL ADDRESS" class="form-control" ng-model="data.email"
+                                   required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Phone Number <span class="required">*</span> </label>
+                        <div class="col-sm-8">
+                            <input type="text" placeholder="PHONE NUMBER" class="form-control" ng-model="data.mobile"
+                                   required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Court <span class="required">*</span> </label>
+                        <div class="col-sm-8">
+                            <input type="text" placeholder="COURT" class="form-control"
+                                   ng-model="data.court"
+                                   required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            <input type="text" placeholder="DIVISION" class="form-control"
+                                   ng-model="data.division"
+                                   required>
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" placeholder="STATE" class="form-control"
+                                   ng-model="data.state"
+                                   required>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <a ui-sref="new_registration" class="btn btn-danger btn-block"><i
+                                class="icon glyphicon-remove"></i>
+                            CANCEL</a>
+                    </div>
+                    <div class="col-sm-6">
+                        <button class="btn btn-default btn-block" ng-disabled="dForm.$invalid"
+                                ng-click="stageThree(dForm)">NEXT <i
+                                class="icon glyphicon-step-forward"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="center-form panel panel-purple" ng-show="thirdForm">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    Choose A Bag
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="bag-selector">
+                    <div class="single-bag" ng-click="selectBag($index)" ng-repeat="slide in bags">
+                        <img ng-src="{{slide.image}}" class="img-thumbnail">
+                        <h4>{{slide.name}} - <span class="label label-success">{{slide.quantity}} Units</span> </h4>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <a ui-sref="new_registration" class="btn btn-danger btn-block"><i
+                                class="icon glyphicon-remove"></i>
+                            CANCEL</a>
+                    </div>
+                    <div class="col-sm-6">
+                        <button class="btn btn-default btn-block" ng-disabled="!data.bag.length"
+                                ng-click="stageFour()">NEXT <i
+                                class="icon glyphicon-step-forward"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="center-form panel panel-purple" ng-show="fourthForm">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    UPDATE NAME TAG (Optional)
+                </div>
+            </div>
+            <div class="panel-body">
+                <form name="tagForm" class="form-horizontal">
+                    <div class="form-group">
+                        <label for="tag_prefix" class="col-md-3 control-label">Prefix</label>
+                        <div class="col-md-9">
+                            <input id="tag_prefix" ng-model="data.tag.prefix" class="form-control"
+                                   placeholder="Chief, Dr., Engr., Prof., Justice etc">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="tag_name">Name <span class="required">*</span>
+                        </label>
+                        <div class="col-md-9">
+                            <input id="tag_name" ng-model="data.tag.name" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="tag_suffix">Suffix</label>
+                        <div class="col-md-9">
+                            <input id="tag_suffix" ng-model="data.tag.suffix" class="form-control"
+                                   placeholder="MON, JSC, JCA, MON, CON, etc">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="tag_firm">Firm <span
+                                class="required">*</span>
+                        </label>
+                        <div class="col-md-9">
+                            <input id="tag_firm" ng-model="data.tag.company" class="form-control" required>
+                        </div>
+                    </div>
+                </form>
+                <hr>
+                <div class="panel-body name-tag">
+                    <div>
+                        <h5 class="text-center" ng-bind="data.tag.prefix" ng-hide="data.tag.prefix.toLowerCase().indexOf('mr')>=0||data.tag.prefix.toLowerCase().indexOf('mis')>=0"></h5>
+                        <h3 class="text-center">{{data.tag.name}} <small ng-bind="data.tag.suffix"></small></h3>
+                        <hr>
+                        <div class="text-center">
+                            <p><strong>{{data.tag.company}}</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <a ui-sref="new_registration" class="btn btn-danger btn-block"><i
+                                class="icon glyphicon-remove"></i>
+                            CANCEL</a>
+                    </div>
+                    <div class="col-sm-6">
+                        <button class="btn btn-default btn-block" ng-disabled="tagForm.$invalid"
+                                ng-click="submit()">COMPLETE <i
+                                class="icon glyphicon-ok"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,57 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="container dashboard">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="panel panel-purple">
+                <div class="panel-heading">
+                    <h2 class="panel-title text-uppercase">
+                        #. Registrations Today
+                    </h2>
+                </div>
+                <div class="panel-body">
+                    <h2>{{stats.count}}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel panel-purple">
+                <div class="panel-heading">
+                    <h2 class="panel-title text-uppercase">
+                        $ Registrations Today
+                    </h2>
+                </div>
+                <div class="panel-body">
+                    <h2>N {{stats.amount.formatMoney()}}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel panel-purple">
+                <div class="panel-heading">
+                    <h2 class="panel-title text-uppercase">
+                        #. All Registrations
+                    </h2>
+                </div>
+                <div class="panel-body">
+                    <h2>{{stats.countAll}}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel panel-purple">
+                <div class="panel-heading">
+                    <h2 class="panel-title text-uppercase">
+                        $ All Registrations
+                    </h2>
+                </div>
+                <div class="panel-body">
+                    <h2>N {{stats.amountAll.formatMoney()}}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a ui-sref="new_registration" class="btn btn-block btn-default btn-xlg"><i class="icon glyphicon-plus-sign"></i>
+        NEW REGISTRATION</a>
+</div>

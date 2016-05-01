@@ -1,0 +1,31 @@
+#san_and_bench {
+  .center-form{
+    margin: 2% auto;
+    width: 450px;
+
+    .panel-title {
+      text-align: center;
+    }
+
+    form {
+      .sForm {
+        width: 80%;
+
+        input {
+          width: 100%;
+        }
+      }
+    }
+
+    .bag-selector {
+      .single-bag {
+        cursor: pointer;
+        margin-bottom: 10px;
+
+        h4 {
+          text-align: center;
+        }
+      }
+    }
+  }
+}
